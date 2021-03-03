@@ -63,7 +63,7 @@ def bndbox_validator(size, width, length):
                   'fragmentation beyond the graph')
             return False
         for (i, j, k, l) in zip(list_xmax, list_xmin, list_ymax, list_ymin):
-            if i <= width and i > 0 and j < width and j >= 0 and k <= height and k > 0 and l < height and l >= 0:
+            if 0 < i <= width and 0 <= j < width and 0 < k <= height and 0 <= l < height:
                 continue
             else:
                 print('Coordinates xmax, xmin, ymax, ymin are wrong with height and width value:'
