@@ -76,10 +76,10 @@ def bndbox_validator(size, width, length):
 
 '''Values validator checks if a value of checked atribute is valid or not. It's a poprawioned version of dtd_validator'''
 
-def values_validator(root, checked_atribute, expected_values):
+def values_validator(root, checked_atribute, valid_values):
     for n in root.iter(checked_atribute):
         #print(n) Tylko w celu sprawdzenia, czy funkcja sprawdza poprawny atrybut
-        if int(n.text) in expected_values:
+        if int(n.text) in valid_values:
             return True
         else:
             print("Invalid value of " + checked_atribute)
