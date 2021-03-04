@@ -10,12 +10,15 @@ def read_xml():
     tree = ET.parse(path)
     root = tree.getroot()
     str_jpg = root.find('filename').text
+    source = root.find('source')
+    database = source.find('database').text
+    d_annotation = source.find('annotation').text
     size = root.find("size")
     width = int(size.find("width").text)
     height = int(size.find("height").text)
-    return path, tree, root, str_jpg, size, width, height
+    return path, tree, root, str_jpg, database, d_annotation, size, width, height
 
-path, tree, root, str_jpg, size, width, height = read_xml()
+path, tree, root, str_jpg, database, d_annotation, size, width, height = read_xml()
 
 
 ''' 
@@ -25,11 +28,22 @@ then transform it from string to the tree. If there is something wrong with the 
 
 def syntax_validator(path):
     with open(path, 'r') as file:
-        txt_xml_file = file.read().replace('','')
+        txt_file = file.read().replace('','')
     try:
-        etree.fromstring(txt_xml_file)
+        etree.fromstring(txt_file)
     except BaseException as e:
         print(e)
+
+
+'''check_database is a function to check if a file is from Pascal The VOC2007 database'''
+
+def check_database(database, annotation):
+    if database == "The VOC2007 Database" and annotation == "PASCAL VOC2007":
+        return True
+    else:
+        print("File is not from Pascal The VOC2007 Database")
+        return False
+
 
 '''
 check_extension is a function to check if file extension in attribute 'filename' is correct
@@ -40,6 +54,7 @@ def check_extension(extension):
         print('Invalid file extension')
         return False
     return True
+
 
 '''
 bnd_validator is a function to validate if bndbox  has a right values of coordinates xmax, xmin, ymax, ymin.  
@@ -74,6 +89,7 @@ def bndbox_validator(size, width, length):
         return False
     return True
 
+
 '''Values validator checks if a value of checked atribute is valid or not. It's a poprawioned version of dtd_validator'''
 
 def values_validator(root, checked_atribute, valid_values):
@@ -89,6 +105,7 @@ def values_validator(root, checked_atribute, valid_values):
 syntax_validator(path)
 bndbox_validator(size, width, height)
 check_extension(str_jpg)
+check_database(database, d_annotation)
 values_validator(root, 'depth', {0, 3})
 values_validator(root, 'truncated', {0, 1})
 values_validator(root, 'difficult', {0, 1})
