@@ -18,8 +18,6 @@ def read_xml():
     height = int(size.find("height").text)
     return path, tree, root, str_jpg, database, d_annotation, size, width, height
 
-path, tree, root, str_jpg, database, d_annotation, size, width, height = read_xml()
-
 
 ''' 
 syntax_validator(path) is a function to validate syntax error. It works how it goes: we open xml file as txt file,
@@ -101,11 +99,14 @@ def values_validator(root, checked_atribute, valid_values):
             print("Invalid value of " + checked_atribute)
             return False
 
+def execute():
+    path, tree, root, str_jpg, database, d_annotation, size, width, height = read_xml()
+    syntax_validator(path)
+    bndbox_validator(size, width, height)
+    check_extension(str_jpg)
+    check_database(database, d_annotation)
+    values_validator(root, 'depth', {0, 3})
+    values_validator(root, 'truncated', {0, 1})
+    values_validator(root, 'difficult', {0, 1})
 
-syntax_validator(path)
-bndbox_validator(size, width, height)
-check_extension(str_jpg)
-check_database(database, d_annotation)
-values_validator(root, 'depth', {0, 3})
-values_validator(root, 'truncated', {0, 1})
-values_validator(root, 'difficult', {0, 1})
+execute()
