@@ -32,6 +32,11 @@ def check_extension(path):
 '''
 bnd_validator is a function to validate if bndbox  has a right values of coordinates xmax, xmin, ymax, ymin.  
 '''
+def empty_min_max(path):
+    for k in ['xmax', 'xmin','ymax','ymin']:
+        for m in root.iter(k):
+            if m.text == None:
+                print('Empty value in',k )
 
 tree = ET.parse(path)
 root = tree.getroot()
@@ -39,7 +44,6 @@ list_xmax = []
 list_xmin = []
 list_ymax = []
 list_ymin = []
-
 
 for branch in root.iter('bndbox'):
     list_xmax += [int(leaf.text) for leaf in branch if leaf.tag == 'xmax']
