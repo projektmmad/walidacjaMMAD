@@ -2,8 +2,9 @@ from lxml import etree
 from methods import *
 import xml.etree.ElementTree as ET
 import glob
+from PIL import Image
 
-'''read_xml is a function to read a xml file'''
+'''xml_files creates a list of xml files in a directory'''
 
 def xml_files(path):
     xmlfiles = []
@@ -12,6 +13,15 @@ def xml_files(path):
     print(xmlfiles)
     return xmlfiles
 
+''' jpeg_size is a function which opens an image and checks its size'''
+
+
+def jpeg_size(path):
+    im = Image.open(path)
+    width, height = im.size
+    return width, height
+
+'''read_xml is a function to read a xml file'''
 
 def read_xml(path):
     path = path
