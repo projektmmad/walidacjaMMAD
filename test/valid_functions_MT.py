@@ -1,15 +1,16 @@
 from lxml import etree
 from methods import *
 import xml.etree.ElementTree as ET
-from os import listdir
+import glob
 
 '''read_xml is a function to read a xml file'''
 
-def files_list(path):
-    list = listdir(path)
-    for i in range(len(list)):
-        list[i] = path + '/' + list[i]
-    return list
+def xml_files(path):
+    xmlfiles = []
+    for file in glob.glob(path + '/' + '*.xml'):
+        xmlfiles.append(file)
+    print(xmlfiles)
+    return xmlfiles
 
 
 def read_xml(path):
@@ -126,7 +127,7 @@ def values_validator(root, checked_atribute, valid_values):
             print("Invalid value of " + checked_atribute)
             return False
 
-lista = files_list('../data_examples/VOC2012/Annotations')
+lista = xml_files('../data_examples/VOC2012/Annotations')
 
 def execute(path):
     read_xml(path)
