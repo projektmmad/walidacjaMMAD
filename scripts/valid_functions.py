@@ -17,6 +17,22 @@ def syntax_validator(path):
         print(e)
         return False
 
+
+def empty_value(tree):
+    empty_list = []
+    compare_list =[]
+    root = tree.getroot()
+    tags = [e.tag for e in tree.findall('.//')]
+    for k in set(tags):
+        for m in root.iter(k):
+            if m.text is None:
+                empty_list.append(k)
+    if empty_list!=compare_list:
+        for j in empty_list:
+            print(f"Empty value in {j}")
+    else:
+        return False
+
 '''
 check_extension is a function to check if file extension in attribute 'filename' is correct
 '''
@@ -31,28 +47,39 @@ great_bnd_validator is a function to validate if bndbox  has a right values of c
 '''
 
 def great_bnd_validator(root, width, height):
-    if empty_min_max(root) != False:
-        list_xmax = []
-        list_xmin = []
-        list_ymax = []
-        list_ymin = []
-
-        for branch in root.iter('bndbox'):
-            list_xmax += [int(leaf.text) for leaf in branch if leaf.tag == 'xmax']
-            list_xmin += [int(leaf.text) for leaf in branch if leaf.tag == 'xmin']
-            list_ymax += [int(leaf.text) for leaf in branch if leaf.tag == 'ymax']
-            list_ymin += [int(leaf.text) for leaf in branch if leaf.tag == 'ymin']
-        bnd_validator1(list_xmax, list_xmin, list_ymax, list_ymin)
-        bnd_validator2(list_xmax, list_xmin, list_ymax, list_ymin)
-        bnd_validator3(list_xmax, list_xmin, list_ymax, list_ymin, width, height)
-    else:
-        return None
+    list_xmax = []
+    list_xmin = []
+    list_ymax = []
+    list_ymin = []
+    for branch in root.iter('bndbox'):
+        list_xmax += [int(leaf.text) for leaf in branch if leaf.tag == 'xmax']
+        list_xmin += [int(leaf.text) for leaf in branch if leaf.tag == 'xmin']
+        list_ymax += [int(leaf.text) for leaf in branch if leaf.tag == 'ymax']
+        list_ymin += [int(leaf.text) for leaf in branch if leaf.tag == 'ymin']
+    bnd_validator1(list_xmax, list_xmin, list_ymax, list_ymin)
+    bnd_validator2(list_xmax, list_xmin, list_ymax, list_ymin)
+    bnd_validator3(list_xmax, list_xmin, list_ymax, list_ymin, width, height)
 
 def values_validator(root, checked_atribute, valid_values):
     for n in root.iter(checked_atribute):
-        # print(n) Tylko w celu sprawdzenia, czy funkcja sprawdza poprawny atrybut
-        if int(n.text) in valid_values:
+        if n.text in valid_values:
             return True
         else:
             print("Invalid value of " + checked_atribute)
             return False
+
+
+def correct_tag(tree):
+    name_tags = ['folder', 'filename', 'source', 'database', 'annotation', 'image', 'size',
+            'width', 'height', 'depth','segmented', 'object', 'name', 'pose', 'truncated',
+            'difficult', 'bndbox', 'xmin', 'ymin', 'xmax', 'ymax', 'part']
+    tags = [e.tag for e in tree.findall('.//')]
+
+    for element in tags:
+        if element not in name_tags:
+            print(f"Incorrect name of tag: there is tag named '{element}'.  ")
+
+def root_tag(root):
+    if root.tag != 'annotation':
+        print(f'Incorrect name of root: {root.tag}')
+
