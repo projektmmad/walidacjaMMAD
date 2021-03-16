@@ -16,12 +16,7 @@ def diff_if_negative(list1, list2):
         if var < 0:
             return True
 
-def empty_min_max(root):
-    for k in ['xmax', 'xmin', 'ymax', 'ymin']:
-        for m in root.iter(k):
-            if m.text is None:
-                print('Empty value in', k)
-                return False
+
 def bnd_validator1(xmax, xmin, ymax, ymin):
     if len(xmax) != len(xmin) or len(ymax) != len(ymin) or len(xmax) != len(ymax):
         print('Wrong amount of coordinates xmax, xmin, ymax, ymin')
