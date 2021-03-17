@@ -17,19 +17,19 @@ def diff_if_negative(list1, list2):
             return True
 
 
-def bnd_validator1(xmax, xmin, ymax, ymin):
+def bnd_validator1(xmax, xmin, ymax, ymin, filename):
     if len(xmax) != len(xmin) or len(ymax) != len(ymin) or len(xmax) != len(ymax):
-        print('Wrong amount of coordinates xmax, xmin, ymax, ymin')
-def bnd_validator2(xmax, xmin, ymax, ymin):
+        print(f'Wrong amount of coordinates xmax, xmin, ymax, ymin in {filename}')
+def bnd_validator2(xmax, xmin, ymax, ymin, filename):
     if diff_if_negative(xmax, xmin) == True or diff_if_negative(ymax, ymin) == True:
-        print('Difference between coordinates xmax and xmin or ymax and ymin is negative: '
-              'fragmentation beyond the graph')
-def bnd_validator3(xmax, xmin, ymax, ymin, width, height):
+        print(f'Difference between coordinates xmax and xmin or ymax and ymin is negative: '
+              f'fragmentation beyond the graph in {filename}')
+def bnd_validator3(xmax, xmin, ymax, ymin, width, height, filename):
     for (i, j, k, l) in zip(xmax, xmin, ymax, ymin):
         if i <= width and i > 0 and j < width and j >= 0 and k <= height and k > 0 and l < height and l >= 0:
             continue
         else:
-            print('Coordinates xmax, xmin, ymax, ymin are wrong with height and width value:'
-                  ' fragmentation beyond the graph ')
+            print(f'Coordinates xmax, xmin, ymax, ymin are wrong with height and width value:'
+                  f' fragmentation beyond the graph in {filename}')
 
 
