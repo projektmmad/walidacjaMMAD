@@ -33,15 +33,14 @@ def empty_value(tree, filename):
     else:
         return False
 
-'''
-check_extension is a function to check if file extension in attribute 'filename' is correct
-'''
 
-def check_extension(str_jpg, filename):
-    if str_jpg.endswith('.jpg') is not True:
-        print(f'Invalid file extension in {filename}')
+# check_extension is a function to check if file extension in attribute 'filename' is correct
 
 
+def check_extension(str_jpg, root, filename):
+    for i in root.iter('filename'):
+        if str_jpg.endswith('.jpg') is not True:
+            print(f'Invalid file extension: {i.text} in {filename}')
 
 '''
 great_bnd_validator is a function to validate if bndbox  has a right values of coordinates xmax, xmin, ymax, ymin.  
@@ -85,4 +84,8 @@ def root_tag(root,filename):
         print(f'Incorrect name of root: {root.tag} in {filename}')
 
 
-
+def correct_filename(root, filename):
+    for i in root.iter('filename'):
+        a = i.text
+        if a[0:-4] != filename[0:-4]:
+            print(f"Incorrect name of filename: {i.text} in {filename}")

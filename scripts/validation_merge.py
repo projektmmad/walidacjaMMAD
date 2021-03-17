@@ -1,5 +1,5 @@
 from valid_functions import *
-import os
+
 path = '../data_examples/VOC2012/Annotations/2007_000027.xml'
 
 
@@ -14,9 +14,10 @@ def pascal_validator_one_file(path):
             height = int(size.find("height").text)
             str_jpg = root.find('filename').text
             correct_tag(tree, filname)
+            check_extension(str_jpg, root, filname)
+            correct_filename(root, filname)
             root_tag(root, filname)
             great_bnd_validator(root, width, height, filname)
-            check_extension(str_jpg, filname)
             values_validator(root, 'depth', {'0', '3'}, filname)
             values_validator(root, 'truncated', {'0', '1'}, filname)
             values_validator(root, 'difficult', {'0', '1'}, filname)
@@ -25,4 +26,4 @@ def pascal_validator_one_file(path):
             return True
     else:
         return True
-pascal_validator_one_file(path)
+#pascal_validator_one_file(path)

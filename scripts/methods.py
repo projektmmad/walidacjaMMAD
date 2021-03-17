@@ -1,5 +1,6 @@
 from lxml import etree
 import xml.etree.ElementTree as ET
+import os
 
 '''
 diff_if_negative is a method that count a difference between two lists, element by element, like a vector difference,
