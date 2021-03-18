@@ -1,8 +1,5 @@
 from methods import *
 
-#path = input("Podaj ścieżkę: ")
-path = '../data_examples/VOC2012/Annotations/2007_000027.xml'
-
 ''' 
 syntax_validator(path) is a function to validate syntax error. It works how it goes: we open xml file as txt file,
 then transform it from string to the tree. If there is something wrong with the syntax, we can't transform it. 
@@ -52,10 +49,10 @@ def great_bnd_validator(root, width, height, filename):
     list_ymax = []
     list_ymin = []
     for branch in root.iter('bndbox'):
-        list_xmax += [int(leaf.text) for leaf in branch if leaf.tag == 'xmax']
-        list_xmin += [int(leaf.text) for leaf in branch if leaf.tag == 'xmin']
-        list_ymax += [int(leaf.text) for leaf in branch if leaf.tag == 'ymax']
-        list_ymin += [int(leaf.text) for leaf in branch if leaf.tag == 'ymin']
+        list_xmax += [float(leaf.text) for leaf in branch if leaf.tag == 'xmax']
+        list_xmin += [float(leaf.text) for leaf in branch if leaf.tag == 'xmin']
+        list_ymax += [float(leaf.text) for leaf in branch if leaf.tag == 'ymax']
+        list_ymin += [float(leaf.text) for leaf in branch if leaf.tag == 'ymin']
     bnd_validator1(list_xmax, list_xmin, list_ymax, list_ymin, filename)
     bnd_validator2(list_xmax, list_xmin, list_ymax, list_ymin, filename)
     bnd_validator3(list_xmax, list_xmin, list_ymax, list_ymin, width, height, filename)
@@ -68,7 +65,7 @@ def values_validator(root, checked_atribute, valid_values, filename):
             print(f"Invalid value of {checked_atribute} in {filename}")
             return False
 
-
+# must be fix. There are more tags
 def correct_tag(tree, filename):
     name_tags = ['folder', 'filename', 'source', 'database', 'annotation', 'image', 'size',
             'width', 'height', 'depth','segmented', 'object', 'name', 'pose', 'truncated',
