@@ -1,7 +1,7 @@
 from valid_functions import *
 
-path = '../data_examples/VOC2012/Annotations/2007_000027.xml'
 
+path = '../data_examples/VOC2012/Annotations/2007_000027.xml'
 
 def pascal_validator_one_file(path):
     filname = os.path.basename(path)
@@ -13,7 +13,7 @@ def pascal_validator_one_file(path):
             width = int(size.find("width").text)
             height = int(size.find("height").text)
             str_jpg = root.find('filename').text
-            correct_tag(tree, filname)
+            # correct_tag(tree, filname) to fix
             check_extension(str_jpg, root, filname)
             correct_filename(root, filname)
             root_tag(root, filname)
