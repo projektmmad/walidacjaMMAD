@@ -84,5 +84,7 @@ def root_tag(root,filename):
 def correct_filename(root, filename):
     for i in root.iter('filename'):
         a = i.text
-        if a[0:-4] != filename[0:-4]:
+        a_split = a.split(".")
+        f_split = filename.split(".")
+        if a_split[0] != f_split[0]:
             print(f"Incorrect name of filename: {i.text} in {filename}")
