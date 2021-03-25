@@ -10,8 +10,8 @@ def pascal_validator_one_file(path):
         root = tree.getroot()
         if empty_value(tree, filname) is False:
             size = root.find("size")
-            width = int(size.find("width").text)
-            height = int(size.find("height").text)
+            width = float(size.find("width").text)
+            height = float(size.find("height").text)
             str_jpg = root.find('filename').text
             # correct_tag(tree, filname) to fix
             check_extension(str_jpg, root, filname)
