@@ -13,5 +13,5 @@ def pascal_validator(path_to_VOC):
 
 
 #path_to_VOC = '/home/annaw/VOCdevkit/VOC2012'
-path_to_VOC = '/home/sandra/walidacjaMMAD/data_examples/VOC2012'
-pascal_validator(path_to_VOC)
+#path_to_VOC = '/home/sandra/walidacjaMMAD/data_examples/VOC2012'
+#pascal_validator(path_to_VOC)
