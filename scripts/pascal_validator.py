@@ -1,4 +1,6 @@
-from VOC2012_dir_structure import *
+from pascal_voc_structure import *
+from pascal_validator_one_file import *
+import argparse
 
 def pascal_validator(path_to_VOC):
     if check_structure(path_to_VOC) is not False:
@@ -11,7 +13,8 @@ def pascal_validator(path_to_VOC):
             for file in list_file:
                 pascal_validator_one_file(f'{dir_annotations}/{file}')
 
+parser = argparse.ArgumentParser()
+parser.add_argument('path', help='path to the file')
+args = parser.parse_args()
 
-#path_to_VOC = '/home/annaw/VOCdevkit/VOC2012'
-#path_to_VOC = '/home/sandra/walidacjaMMAD/data_examples/VOC2012'
-#pascal_validator(path_to_VOC)
+pascal_validator(args.path)
