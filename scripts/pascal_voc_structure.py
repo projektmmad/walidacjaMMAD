@@ -44,13 +44,13 @@ def VOC_warning_dir(path_to_VOC):
 def trash_in_ann(path_to_VOC):
     for file_xml in os.listdir(path_to_VOC + '/Annotations'):
         if file_xml.endswith('.xml') is False:
-            print(f"Error: Invalid file(s) in folder 'Annotations' - there should be only .xml files ")
+            print(f"Error: Invalid file '{file_xml}' in folder 'Annotations' - there should be only .xml files ")
             return False
 
 def trash_in_jpg(path_to_VOC):
     for file_jpg in os.listdir(path_to_VOC + '/JPEGImages'):
         if file_jpg.endswith('.jpg') is False and file_jpg.endswith('.jpeg') is False:
-            print(f"Error: Invalid file in folder 'JPEGImages' - there should be only .jp(e)g files ")
+            print(f"Error: Invalid file '{file_jpg} in folder 'JPEGImages' - there should be only .jp(e)g files ")
             return False
 
 # jpg_xml(path_to_VOC) - the function checks if the files are the same in two folders: '/Annotations' and /JPEGImages'
