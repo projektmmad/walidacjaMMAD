@@ -1,4 +1,4 @@
-from pascal_valid_functions import *
+from scripts.pascal_valid_functions import *
 
 
 path = '../data_examples/VOC2012/Annotations/2007_000027.xml'

@@ -1,4 +1,4 @@
-from pascal_validator_one_file import *
+from scripts.pascal_validator_one_file import *
 
 def check_path(path_to_VOC):
     if os.path.isdir(path_to_VOC) is True:

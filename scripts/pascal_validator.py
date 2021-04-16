@@ -1,5 +1,5 @@
-from pascal_voc_structure import *
-from pascal_validator_one_file import *
+from scripts.pascal_voc_structure import *
+from scripts.pascal_validator_one_file import *
 import argparse
 
 def pascal_validator(path_to_VOC):
@@ -12,6 +12,7 @@ def pascal_validator(path_to_VOC):
             list_file = os.listdir(dir_annotations)
             for file in list_file:
                 pascal_validator_one_file(f'{dir_annotations}/{file}')
+    return True
 
 parser = argparse.ArgumentParser()
 parser.add_argument('path', help='path to the file')
