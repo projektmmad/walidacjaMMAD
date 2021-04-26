@@ -1,8 +1,39 @@
 import json
 
-def skladnia2_valid(json_file):
+#tu wypisuje wszystkie wartości składni, by skrócić funkcję sprawdzania składni - do dokończenia
+WZOR = {
+    "image": {
+        "id",
+        "width",
+        "height",
+        "file_name",
+        "license",
+        "flickr_url"
 
-    json_data = json.load(open('data.json'))
+    }
+    ,
+    "info": {
+        "year",
+        "version",
+        "description",
+        "contributor",
+        "url",
+        "date_created",
+    }
+}
+
+
+# szybszy zapis wyszukania wartosci
+def skladnia2_valid(json_file):
+    for key, value in WZOR.items():
+        if json_file[key]:
+            print("jest!")
+
+    print()
+
+
+
+    json_data = json_file
 
     if json_data.get('info') == None:
         return False
@@ -15,7 +46,7 @@ def skladnia2_valid(json_file):
 
     if json_data.get('info').get('year') == None:
         return False
-     if json_data.get('info').get('version') == None:
+    if json_data.get('info').get('version') == None:
         return False
     if json_data.get('info').get('description') == None:
         return False
@@ -152,3 +183,15 @@ def skladnia2_valid(json_file):
         return False
 
     return True
+
+
+if __name__ == "__main__":
+    with open("data.json") as file:
+        try:
+            data = json.load(file)
+        except  JSONDecode:
+
+    print("DONE")
+
+    foo = skladnia2_valid(data)
+    print(foo)
