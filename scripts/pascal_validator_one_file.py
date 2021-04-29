@@ -1,7 +1,4 @@
-from scripts.pascal_valid_functions import *
-
-
-path = '../data_examples/VOC2012/Annotations/2007_000027.xml'
+from pascal_valid_functions import *
 
 def pascal_validator_one_file(path):
     filname = os.path.basename(path)
@@ -9,7 +6,7 @@ def pascal_validator_one_file(path):
         tree = ET.parse(path)
         root = tree.getroot()
         if empty_value(tree, filname) is False:
-            if correct_tag(tree,filname) is not False:
+            if correct_tag(tree, filname) is not False:
                 size = root.find("size")
                 width = float(size.find("width").text)
                 height = float(size.find("height").text)
@@ -22,5 +19,3 @@ def pascal_validator_one_file(path):
                 values_validator(root, 'truncated', {'0', '1'}, filname)
                 values_validator(root, 'difficult', {'0', '1'}, filname)
                 values_validator(root, 'pose', {'Unspecified', 'Rear', 'Frontal', 'Left', 'Right'}, filname)
-
-pascal_validator_one_file(path)
