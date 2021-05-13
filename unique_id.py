@@ -17,11 +17,12 @@ def id_unique(a):
         set_id.add(i['id'])
 
     if len(list_id) == len(set_id):
-        return True
+        return [True]
     else:
-        return False
+        return [False, a]
 
 lista_sekcje=["images","licenses","annotations","categories"]
 for i in lista_sekcje:
-    id_unique(i)
-print(id_unique(i))
+    x=id_unique(i)
+    if not x[0]:
+        print(x[1])
