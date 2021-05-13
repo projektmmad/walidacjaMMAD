@@ -21,8 +21,25 @@ def id_unique(a):
     else:
         return [False, a]
 
-lista_sekcje=["images","licenses","annotations","categories"]
+lista_sekcje = ["images", "licenses", "annotations", "categories"]
+
 for i in lista_sekcje:
-    x=id_unique(i)
+    x = id_unique(i)
     if not x[0]:
-        print(x[1])
+        print("Nieunikalne id w sekcji " + str(x[1]))
+
+def poprawnosc_id(a, b, c):
+    list_id = lista_id(a)
+    list_id = np.array(list_id)
+    y = []
+    for i in range(len(python_obj[b])):
+        x = python_obj[b][i][c]
+        y.append(x in list_id)
+    if False in y:
+        print("Blad " + str(c) + " w sekcji " + str(b))
+        return False
+    else:
+        return True
+print(poprawnosc_id("categories", "annotations", "category_id"))
+print(poprawnosc_id("images", "annotations", "image_id"))
+print(poprawnosc_id("licenses", "images", "license"))
