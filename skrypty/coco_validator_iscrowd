@@ -1,0 +1,16 @@
+import json
+with open("C:/Users/akost/PycharmProjects/Projekt_walidacja_intel/data.json", 'r') as f:
+    data = f.read()
+python_obj = json.loads(data)
+
+def test_iscrowd():
+    l = []
+    for i in range(len(python_obj["annotations"])):
+        if (python_obj['annotations'][i]['iscrowd']) != 1 and (python_obj['annotations'][i]['iscrowd']) != 0:
+            l.append((python_obj['annotations'][i]))
+    if len(l) == 0:
+        return True
+    else:
+        for i in range(len(l)):
+            print("Błąd w sekcji iscrowd w fragmencie:", l[i])
+        return False
