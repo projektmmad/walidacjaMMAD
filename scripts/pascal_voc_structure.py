@@ -1,4 +1,5 @@
 from pascal_validator_one_file import *
+from PIL import Image
 
 
 def check_path(path_to_voc: str):
@@ -48,18 +49,24 @@ def voc_warning_miss_dir(path_to_voc: str):
             print(f'Warning: Missing folder: \"{cat}\" ')
 
 
-def trash_in_ann(path_to_voc: str):
-    for file_xml in os.listdir(os.path.join(path_to_voc, 'Annotations')):
-        if file_xml.endswith('.xml') is False:
-            print(f"Error: Invalid file '{file_xml}' in folder 'Annotations' - there should be only .xml files ")
-            return False
-
-
-def trash_in_jpg(path_to_voc: str):
+def trash_in_ann_jpg(path_to_voc: str):
+    list_error_jpg=[]
+    list_error_ann=[]
     for file_jpg in os.listdir(os.path.join(path_to_voc, 'JPEGImages')):
         if file_jpg.endswith('.jpg') is False and file_jpg.endswith('.jpeg') is False:
-            print(f"Error: Invalid file '{file_jpg} in folder 'JPEGImages' - there should be only .jp(e)g files ")
-            return False
+            list_error_jpg.append(file_jpg)
+    for file_xml in os.listdir(os.path.join(path_to_voc, 'Annotations')):
+        if file_xml.endswith('.xml') is False:
+            list_error_ann.append(file_xml)
+    if len(list_error_jpg) != 0 or len(list_error_ann) != 0:
+        if len(list_error_jpg) != 0:
+            print(f"Error: Invalid file '{list_error_jpg} in folder 'JPEGImages' - there should be only .jp(e)g files ")
+        if len(list_error_ann) != 0:
+            print(f"Error: Invalid file '{list_error_ann} in folder 'Annotation' - there should be only .xml files ")
+        return False
+    else:
+        return True
+
 
 
 def jpg_xml(path_to_voc: str):
@@ -105,3 +112,16 @@ def trash_folders(path_to_voc: str):
     for file_png in os.listdir(os.path.join(path_to_voc, 'SegmentationObject')):
         if file_png.endswith('.png') is not True:
             print(f"Invalid file '{file_png}' in folder 'SegmentationObject' ")
+
+
+def jpeg_size(image_path):
+    im = Image.open(image_path)
+    width, height = im.size
+    return width, height
+
+
+def image_size_compare(image_path, xml_width, xml_height, filename):
+    image_width, image_height = jpeg_size(image_path)
+    if image_width != xml_width or image_height != xml_height:
+        print(f"Size of an image in annotation is different than the image size in {filename}")
+

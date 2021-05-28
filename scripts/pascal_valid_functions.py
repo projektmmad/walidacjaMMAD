@@ -97,12 +97,15 @@ def great_bnd_validator(root, width: float, height: float, filename: str):
 
 
 def values_validator(root, checked_atribute, valid_values, filename: str):
+    list_invalid_values = []
     for n in root.iter(checked_atribute):
-        if n.text in valid_values:
-            return True
-        else:
-            print(f"Invalid value of {checked_atribute} in {filename}")
-            return False
+        if n.text not in valid_values:
+            list_invalid_values.append(n.text)
+    if len(list_invalid_values) != 0:
+        print(f"Invalid value of {checked_atribute} in {filename}")
+        return False
+    else:
+        return True
 
 
 def correct_tag(tree, filename: str):

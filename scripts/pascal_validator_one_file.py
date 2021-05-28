@@ -22,3 +22,7 @@ def pascal_validator_one_file(path: str):
                 values_validator(root, 'truncated', {'0', '1'}, filname)
                 values_validator(root, 'difficult', {'0', '1'}, filname)
                 values_validator(root, 'pose', {'Unspecified', 'Rear', 'Frontal', 'Left', 'Right'}, filname)
+
+def pascal_validator_one_file_syntax(path: str):
+    filname = os.path.basename(path)
+    syntax_validator(path, filname)
