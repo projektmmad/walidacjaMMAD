@@ -1,5 +1,5 @@
 import json
-with open("C:/Users/akost/PycharmProjects/Projekt_walidacja_intel/data.json", 'r') as f:
+with open("data.json", 'r') as f:
     data = f.read()
 python_obj = json.loads(data)
 
