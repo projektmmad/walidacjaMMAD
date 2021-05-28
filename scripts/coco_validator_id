@@ -1,0 +1,26 @@
+#wczytanie pliku data jak w pliku coco_validator_iscrowd
+
+def unique_id(a):
+    l=[]
+    list_id = []
+    set_id = set()
+    for i in range(len(python_obj[a])):
+        set_id.add(python_obj[a][i]['id'])
+        list_id.append(python_obj[a][i]['id'])
+
+    if len(list_id) != len(set_id):
+        p=[]
+        for i in list_id:
+            p.append(list_id.count(i))
+        for i in range(len(p)):
+            if p[i] > 1:
+                l.append((python_obj[a][i]))
+    return l
+
+lista_sekcje = ["images", "licenses", "annotations", "categories"]
+
+for i in lista_sekcje:
+    l = unique_id(i)
+    if len(l) != 0:
+        for a in range(len(l)):
+            print("Nieunikalne id! \nNieunikalna wartość id w sekcji", i,"w fragmencie:", l[a])
