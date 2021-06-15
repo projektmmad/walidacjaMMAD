@@ -1,12 +1,21 @@
 #wczytanie pliku data jak w pliku coco_validator_iscrowd
 
-def unique_id(a):
-    l=[]
-    list_id = []
+def sets_id(a):
     set_id = set()
     for i in range(len(python_obj[a])):
         set_id.add(python_obj[a][i]['id'])
+    return set_id
+
+def lista_id(a):
+    list_id = []
+    for i in range(len(python_obj[a])):
         list_id.append(python_obj[a][i]['id'])
+    return list_id
+
+def unique_id(a):
+    l=[]
+    list_id = lista_id(a)
+    set_id = sets_id(a)
 
     if len(list_id) != len(set_id):
         p=[]
