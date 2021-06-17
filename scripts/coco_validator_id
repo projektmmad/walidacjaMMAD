@@ -1,4 +1,9 @@
-#wczytanie pliku data jak w pliku coco_validator_iscrowd
+import json
+import numpy as np
+
+with open("C:/Users/akost/PycharmProjects/Projekt_walidacja_intel/data.json", 'r') as f:
+    data = f.read()
+python_obj = json.loads(data)
 
 def sets_id(a):
     set_id = set()
@@ -33,3 +38,20 @@ for i in lista_sekcje:
     if len(l) != 0:
         for a in range(len(l)):
             print("Nieunikalne id! \nNieunikalna wartość id w sekcji", i,"w fragmencie:", l[a])
+
+def same_id(a, b, c):
+    list_id = np.array(lista_id(a))
+    y = []
+    for i in range(len(python_obj[b])):
+        x = python_obj[b][i][c]
+        if x not in list_id:
+            y.append(python_obj[b])
+    return y
+
+lista_same = [('categories', 'annotations', 'category_id'),('images', 'annotations', 'image_id'),('licenses', 'images', 'license')]
+
+for i in lista_same:
+    y = same_id(i[0],i[1],i[2])
+    if len(y) != 0:
+        for a in range(len(y)):
+           print("Brak wartości", i[2],"( sekcja",i[1],") w bazie id z sekcji",i[2],"! \nbłąd w fragmencie:", y[a],"\n")
